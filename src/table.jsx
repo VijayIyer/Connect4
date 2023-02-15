@@ -101,9 +101,9 @@ export class Table extends Component{
 		for(let i = 0; i < rows; i++){
 			for(let j = 0; j <= cols - 4; j ++){
 				let compareArray =this.state.filled.filter((x, index) =>index == i*cols+j || 
-						index == i*cols+j + 1 || 
-						index == i*cols+j + 2 || 
-						index == i*cols+j + 3);
+						index == i*cols+ (j + 1) || 
+						index == i*cols+ (j + 2) || 
+						index == i*cols+ (j + 3));
 				console.log(`compareHorizontalArray: ${compareArray}`)
 				if (compareArray.every((x, index, arr) => ((x == 'red' || x == 'blue') && x == arr[0] && arr.length == 4))) {
 					this.setState({
@@ -119,7 +119,7 @@ export class Table extends Component{
 	let rows = this.props.numRows;
 		let cols = this.props.numCols;
 		for(let i = 0; i <= rows - 4; i++){
-			for(let j = 0; j <= cols - 4; j ++){
+			for(let j = cols - 1; j >= cols - 4; j--){
 				let compareArray =this.state.filled.filter((x, index) => index == i*cols+j || 
 					index == (i+1)*cols+ (j-1) || 
 					index == (i+2)*cols+ (j-2) || 
