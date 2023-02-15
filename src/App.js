@@ -19,10 +19,12 @@ class App extends Component {
       <Button variant='outline-dark' onClick={()=>this.refresh()}>Refresh</Button>
       <ul>
         <li><div>Try to get a pattern with 4 continuous circles having same color</div></li>
+        <li><div>Refresh to start over again</div></li>
         <li><div>Grey - disabled</div></li>
         <li><div>White - allowed</div></li>
         <li><div>Red - Player 1 filled</div></li>
         <li><div>Blue - Player 2 filled</div></li>
+        <li><div>Marked Solid Border - 4 Consecutive locations with same color</div></li>
       </ul>
       <Table numRows={6} numCols={6} />
     </div>

@@ -24,9 +24,8 @@ export class Cell extends Component{
 	}
 	render(){
 		// console.log(`this cell is in allowed? ${this.props.allowed.some(x => x == this.props.cellNumber)} is filled? ${this.state.fill} with color ${this.state.fillColor}`)
-		console.log(`${this.props.winningCircles.length > 0?  this.props.winningCircles:''}`);
 		return (
-			<td className={`${this.props.winningCircles.some(x => x == this.props.cellNumber) ? 'winning': this.props.allowed.some(x => x == this.props.cellNumber) ? (this.state.fill ? (this.state.fillColor == 'red'? 'red-fill' : 'blue-fill'): 'allowed') : ''}`} onClick={(e) => this.fill(e)}>
+			<td className={`${this.props.allowed.some(x => x == this.props.cellNumber) ? (this.state.fill ? (this.state.fillColor == 'red'? 'red-fill' : 'blue-fill'): 'allowed') : ''} ${this.props.winningCircles.some(x => x == this.props.cellNumber) ? 'winning': ''}`} onClick={(e) => this.fill(e)} >
 			</td>)
 	}
 }
@@ -91,23 +90,42 @@ export class Table extends Component{
 		});
 	}
 	isGameOver(){
-		return this.checkHorizontalCells() || this.checkVerticalCells() || this.checkLeftRightDiagonals() || this.checkRightLeftDiagonals();
+		return this.checkVerticalCells()
+		|| this.checkHorizontalCells() 
+		|| this.checkLeftRightDiagonals()
+		|| this.checkRightLeftDiagonals();
 	}
 	// these 4 methods need to be more clean and easier to understand
 	checkHorizontalCells(){
-		
+		let compareArrayLocations = {
+		index:[]
+	}
 		let rows = this.props.numRows;
 		let cols = this.props.numCols;
 		for(let i = 0; i < rows; i++){
 			for(let j = 0; j <= cols - 4; j ++){
-				let compareArray =this.state.filled.filter((x, index) =>index == i*cols+j || 
+				let compareArrayLocations = {
+		index:[]
+	}
+				let compareArray =this.state.filled.filter(function (x, index, arr) {
+					if(index == i*cols+j || 
 						index == i*cols+ (j + 1) || 
 						index == i*cols+ (j + 2) || 
-						index == i*cols+ (j + 3));
-				console.log(`compareHorizontalArray: ${compareArray}`)
-				if (compareArray.every((x, index, arr) => ((x == 'red' || x == 'blue') && x == arr[0] && arr.length == 4))) {
+						index == i*cols+ (j + 3)
+					&& (x == 'red'  || x == 'blue') 
+					&& ((arr[i*cols+j] == x) 
+					&& (arr[i*cols+(j+1)]== x)
+					&& (arr[i*cols+(j+2)]== x)
+					&& (arr[i*cols+(j+3)]== x)))
+					{
+						this.index.push(index);
+						return true;
+					}
+			}, compareArrayLocations)
+				console.log(`compareArrayLocations: ${compareArrayLocations.index}`)
+				if (compareArray.length == 4 && compareArray.every((x, index, arr) => ((x == 'red' || x == 'blue') && x == arr[0]))) {
 					this.setState({
-						winningCircles: compareArray
+						winningCircles: compareArrayLocations.index
 					});
 					return true
 				};
@@ -116,18 +134,35 @@ export class Table extends Component{
 		return false;
 	}
 	checkLeftRightDiagonals(){
+	
 	let rows = this.props.numRows;
 		let cols = this.props.numCols;
 		for(let i = 0; i <= rows - 4; i++){
 			for(let j = cols - 1; j >= cols - 4; j--){
-				let compareArray =this.state.filled.filter((x, index) => index == i*cols+j || 
-					index == (i+1)*cols+ (j-1) || 
-					index == (i+2)*cols+ (j-2) || 
-					index == (i+3)*cols+ (j-3));
-				console.log(`compareHorizontalArray: ${compareArray}`)
-				if (compareArray.every((x, index, arr) => ((x == 'red' || x == 'blue') && x == arr[0] && arr.length == 4))) {
+				let compareArrayLocations = {
+		index:[]
+	}
+				let compareArray =this.state.filled.filter(function (x, index, arr) {
+					if(index == i*cols+j || 
+						index == (i+1)*cols+ (j-1) || 
+						index == (i+2)*cols+ (j-2) || 
+						index == (i+3)*cols+ (j-3)
+					&& (x == 'red'  || x == 'blue') 
+					&& ((arr[i*cols+j] == x) 
+					&& (arr[(i+1)*cols+(j-1)]== x)
+					&& (arr[(i+2)*cols+(j-2)]== x)
+					&& (arr[(i+3)*cols+(j-3)]== x)))
+					{
+
+						this.index.push(index);
+						return true;
+					}
+			}, compareArrayLocations)
+
+				console.log(`compareArrayLocations: ${compareArrayLocations.index}`)
+				if (compareArray.length == 4 && compareArray.every((x, index, arr) => ((x == 'red' || x == 'blue') && x == arr[0]))) {
 					this.setState({
-						winningCircles: compareArray
+						winningCircles: compareArrayLocations.index
 					})
 					return true
 				};
@@ -136,18 +171,33 @@ export class Table extends Component{
 		return false;
 	}
 	checkRightLeftDiagonals(){
+		
 		let rows = this.props.numRows;
 		let cols = this.props.numCols;
 		for(let i = 0; i <= rows - 4; i++){
 			for(let j = 0; j <= cols - 4; j ++){
-				let compareArray =this.state.filled.filter((x, index) => index == i*cols+j || 
-					index == (i+1)*cols+ (j+1) || 
-					index == (i+2)*cols+ (j+2) || 
-					index == (i+3)*cols+ (j+3));
-				console.log(`compareHorizontalArray: ${compareArray}`)
-				if (compareArray.every((x, index, arr) => ((x == 'red' || x == 'blue') && x == arr[0] && arr.length == 4))) {
+				let compareArrayLocations = {
+					index:[]
+					}
+				let compareArray =this.state.filled.filter(function (x, index, arr) {
+				if (index == i*cols+j || 
+					  index == (i+1)*cols+ (j+1) || 
+					  index == (i+2)*cols+ (j+2) || 
+					  index == (i+3)*cols+ (j+3)
+					&& (x == 'red'  || x == 'blue') 
+					&& ((arr[i*cols+j] == x) 
+					&& (arr[(i+1)*cols+(j+1)]== x)
+					&& (arr[(i+2)*cols+(j+2)]== x)
+					&& (arr[(i+3)*cols+(j+3)]== x)))
+				{
+					this.index.push(index);
+					return true;
+				}
+		}, compareArrayLocations)
+				console.log(`compareArrayLocations: ${compareArrayLocations.index}`)
+				if (compareArray.length == 4 && compareArray.every((x, index, arr) => ((x == 'red' || x == 'blue') && x == arr[0]))) {
 					this.setState({
-						winningCircles: compareArray
+						winningCircles: compareArrayLocations.index
 					})
 					return true
 				};
@@ -156,19 +206,36 @@ export class Table extends Component{
 		return false;
 	}
 	checkVerticalCells(){
+		console.log(`checking vertical cells`);
+		
 		console.log('checking vertical 4 in a row');
 		let rows = this.props.numRows;
 		let cols = this.props.numCols;
 		for(let i = 0; i <= rows - 4; i++){
 			for(let j = 0; j < cols; j ++){
-				let compareArray =this.state.filled.filter((x, index) => index == i*cols+j || 
+				let compareArrayLocations = {
+		index:[]
+	}
+				let compareArray =this.state.filled.filter(function (x, index, arr) {
+					if((index == i*cols+j || 
 					index == (i+1)*cols+j || 
 					index == (i+2)*cols+j || 
-					index == (i+3)*cols+j );
-				console.log(`compareVerticalArray : ${compareArray}`)
-				if (compareArray.every((x, index, arr) => ((x == 'red' || x == 'blue') && x == arr[0] && arr.length == 4))) {
+					index == (i+3)*cols+j)
+					&& (x == 'red'  || x == 'blue') 
+					&& ((arr[i*cols+j] == x) 
+					&& (arr[(i+1)*cols+j]== x)
+					&& (arr[(i+2)*cols+j]== x)
+					&& (arr[(i+3)*cols+j]== x)))
+					{
+						this.index.push(index);
+						return true;
+				}
+		}, compareArrayLocations);
+				console.log(`compareArray : ${compareArray}`)
+				if(compareArray.length == 4 && compareArray.every((x, index, arr) => ((x == 'red' || x == 'blue') && (x == arr[0])))) {
+					console.log(`compareArray length ${compareArray.length}`);
 					this.setState({
-						winningCircles: compareArray
+						winningCircles: compareArrayLocations.index
 					})
 					return true
 				};

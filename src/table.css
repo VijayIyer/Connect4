@@ -1,6 +1,7 @@
 table {
   border-spacing: 1em;
   margin: 1rem auto;
+  border-collapse: separate;
 }
 .allowed{
   background-color: white;
@@ -8,24 +9,24 @@ table {
 td {
   padding: 1rem 1.2rem;
   border-radius: 50%;
-  border: 1px solid red;
+  border: 1px solid black;
   cursor: pointer;
   background-color: grey;
 }
 .winning{
-  radius: 5em;
-  background-color: green;
+  border-color: white;
+  border: 5px solid;
 }
 .background{
   background-color:yellow;
 }
-#border-separate:checked ~ table {
+/*#border-separate:checked ~ table {
   border-collapse: separate;
 }
 
 #border-collapse:checked ~ table {
   border-collapse: collapse;
-}
+}*/
 .red-fill{
   background-color: red;
 }
@@ -34,7 +35,7 @@ td {
 }
 .disabledDiv{
   pointer-events: none;
-  opacity: 0.4;
+  opacity: 0.6;
 }
 body {
   align-self:center;
