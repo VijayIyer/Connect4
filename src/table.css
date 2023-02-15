@@ -2,18 +2,23 @@ table {
   border-spacing: 1em;
   margin: 1rem auto;
 }
-.allowed *{
+.allowed{
   background-color: white;
 }
 td {
   padding: 1rem 1.2rem;
-  border-radius: 6px;
+  border-radius: 50%;
   border: 1px solid red;
   cursor: pointer;
   background-color: grey;
 }
-
-
+.winning{
+  radius: 5em;
+  background-color: green;
+}
+.background{
+  background-color:yellow;
+}
 #border-separate:checked ~ table {
   border-collapse: separate;
 }
@@ -27,8 +32,13 @@ td {
 .blue-fill{
   background-color: blue;
 }
+.disabledDiv{
+  pointer-events: none;
+  opacity: 0.4;
+}
 body {
-  text-align: center;
+  align-self:center;
+  
 }
 input {
   margin-right: 20px;
