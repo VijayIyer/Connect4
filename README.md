@@ -1,3 +1,13 @@
+# About the page:
+- The game of Connect4, implemented in ReactJS
+- All components are in table.jsx and are class components, as opposed to the more popular functional components right now
+- Plans to add multiplayer support with a backend websocket
+- More styling needed.....
+- The `Table` component passes down all state as props to child components
+- Plan to move some states to a context object or use Redux for state management
+
+## Code Generated Instructions
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
