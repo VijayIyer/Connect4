@@ -93,6 +93,7 @@ export class Table extends Component{
 	isGameOver(){
 		return this.checkHorizontalCells() || this.checkVerticalCells() || this.checkLeftRightDiagonals() || this.checkRightLeftDiagonals();
 	}
+	// these 4 methods need to be more clean and easier to understand
 	checkHorizontalCells(){
 		
 		let rows = this.props.numRows;
