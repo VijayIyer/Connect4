@@ -5,6 +5,7 @@
 - More styling needed.....
 - The `Table` component passes down all state as props to child components
 - Plan to move some states to a context object or use Redux for state management
+- Open app [here](https://mklimylgn.github.stackblitz.io) or open code and app side-by-side [here](https://stackblitz.com/github/VijayIyer/Connect4?file=src/table.jsx). Simply deployed using stackblitz
 
 ## Code Generated Instructions
 
