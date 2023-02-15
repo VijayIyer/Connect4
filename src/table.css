@@ -1,0 +1,35 @@
+table {
+  border-spacing: 1em;
+  margin: 1rem auto;
+}
+.allowed *{
+  background-color: white;
+}
+td {
+  padding: 1rem 1.2rem;
+  border-radius: 6px;
+  border: 1px solid red;
+  cursor: pointer;
+  background-color: grey;
+}
+
+
+#border-separate:checked ~ table {
+  border-collapse: separate;
+}
+
+#border-collapse:checked ~ table {
+  border-collapse: collapse;
+}
+.red-fill{
+  background-color: red;
+}
+.blue-fill{
+  background-color: blue;
+}
+body {
+  text-align: center;
+}
+input {
+  margin-right: 20px;
+}
