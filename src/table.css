@@ -13,7 +13,7 @@ td {
   background-color: grey;
 }
 .winning{
-  radius: 5em;
+  outline-color: white;
   background-color: green;
 }
 .background{

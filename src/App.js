@@ -23,6 +23,7 @@ class App extends Component {
         <li><div>White - allowed</div></li>
         <li><div>Red - Player 1 filled</div></li>
         <li><div>Blue - Player 2 filled</div></li>
+        <li><div>Green - 4 Consecutive locations with same color</div></li>
       </ul>
       <Table numRows={6} numCols={6} />
     </div>
