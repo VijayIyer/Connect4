@@ -25,7 +25,7 @@ export class Cell extends Component{
 	render(){
 		// console.log(`this cell is in allowed? ${this.props.allowed.some(x => x == this.props.cellNumber)} is filled? ${this.state.fill} with color ${this.state.fillColor}`)
 		return (
-			<td className={`${this.props.winningCircles.some(x => x == this.props.cellNumber) ? 'winning': this.props.allowed.some(x => x == this.props.cellNumber) ? (this.state.fill ? (this.state.fillColor == 'red'? 'red-fill' : 'blue-fill'): 'allowed') : ''}`} onClick={(e) => this.fill(e)}>
+			<td className={`${this.props.allowed.some(x => x == this.props.cellNumber) ? (this.state.fill ? (this.state.fillColor == 'red'? 'red-fill' : 'blue-fill'): 'allowed') : ''} ${this.props.winningCircles.some(x => x == this.props.cellNumber) ? 'winning': ''}`} onClick={(e) => this.fill(e)} >
 			</td>)
 	}
 }

@@ -14,7 +14,8 @@ td {
   background-color: grey;
 }
 .winning{
-  background-color: darkgreen;
+  border-color: white;
+  border: 5px solid;
 }
 .background{
   background-color:yellow;
