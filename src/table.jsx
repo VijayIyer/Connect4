@@ -12,10 +12,10 @@ export class Cell extends Component{
 		this.fill = this.fill.bind(this);
 	}
 	fill(e){
-		if(this.props.allowed.some(x => x == this.props.cellNumber) && !this.state.fill){
+		if(this.props.allowed.some(x => x === this.props.cellNumber) && !this.state.fill){
 			this.setState({
 				fill: true,
-				fillColor: this.props.turn == 'red' ? 'red' : 'blue'
+				fillColor: this.props.turn === 'red' ? 'red' : 'blue'
 			})
 		  this.props.setTurn();
 			this.props.allowed.push(this.props.cellNumber - 6);
@@ -25,7 +25,7 @@ export class Cell extends Component{
 	render(){
 		// console.log(`this cell is in allowed? ${this.props.allowed.some(x => x == this.props.cellNumber)} is filled? ${this.state.fill} with color ${this.state.fillColor}`)
 		return (
-			<td className={`${this.props.allowed.some(x => x == this.props.cellNumber) ? (this.state.fill ? (this.state.fillColor == 'red'? 'red-fill' : 'blue-fill'): 'allowed') : ''} ${this.props.winningCircles.some(x => x == this.props.cellNumber) ? 'winning': ''}`} onClick={(e) => this.fill(e)} >
+			<td className={`${this.props.allowed.some(x => x === this.props.cellNumber) ? (this.state.fill ? (this.state.fillColor === 'red'? 'red-fill' : 'blue-fill'): 'allowed') : ''} ${this.props.winningCircles.some(x => x === this.props.cellNumber) ? 'winning': ''}`} onClick={(e) => this.fill(e)} >
 			</td>)
 	}
 }
@@ -46,7 +46,7 @@ export class Row extends Component{
 					key={cell} 
 					turn={this.props.turn} 
 					setTurn={this.props.setTurn}
-					className={`${this.props.allowed.some(x => x == cell)  ? 'allowed' : ''}`}allowed={this.props.allowed}
+					className={`${this.props.allowed.some(x => x === cell)  ? 'allowed' : ''}`}allowed={this.props.allowed}
 					 addFilled={this.props.addFilled}
 					 cellNumber={cell}
 					 onClick={(e)=>this.fill(e)}
@@ -112,18 +112,18 @@ export class Table extends Component{
 						index == i*cols+ (j + 1) || 
 						index == i*cols+ (j + 2) || 
 						index == i*cols+ (j + 3)
-					&& (x == 'red'  || x == 'blue') 
-					&& ((arr[i*cols+j] == x) 
-					&& (arr[i*cols+(j+1)]== x)
-					&& (arr[i*cols+(j+2)]== x)
-					&& (arr[i*cols+(j+3)]== x)))
+					&& (x === 'red'  || x === 'blue') 
+					&& ((arr[i*cols+j] === x) 
+					&& (arr[i*cols+(j+1)]=== x)
+					&& (arr[i*cols+(j+2)]=== x)
+					&& (arr[i*cols+(j+3)]=== x)))
 					{
 						this.index.push(index);
 						return true;
 					}
 			}, compareArrayLocations)
 				console.log(`compareArrayLocations: ${compareArrayLocations.index}`)
-				if (compareArray.length == 4 && compareArray.every((x, index, arr) => ((x == 'red' || x == 'blue') && x == arr[0]))) {
+				if (compareArray.length == 4 && compareArray.every((x, index, arr) => ((x === 'red' || x === 'blue') && x === arr[0]))) {
 					this.setState({
 						winningCircles: compareArrayLocations.index
 					});
@@ -147,11 +147,11 @@ export class Table extends Component{
 						index == (i+1)*cols+ (j-1) || 
 						index == (i+2)*cols+ (j-2) || 
 						index == (i+3)*cols+ (j-3)
-					&& (x == 'red'  || x == 'blue') 
+					&& (x === 'red'  || x === 'blue') 
 					&& ((arr[i*cols+j] == x) 
-					&& (arr[(i+1)*cols+(j-1)]== x)
-					&& (arr[(i+2)*cols+(j-2)]== x)
-					&& (arr[(i+3)*cols+(j-3)]== x)))
+					&& (arr[(i+1)*cols+(j-1)] === x)
+					&& (arr[(i+2)*cols+(j-2)] === x)
+					&& (arr[(i+3)*cols+(j-3)] === x)))
 					{
 
 						this.index.push(index);
@@ -184,18 +184,18 @@ export class Table extends Component{
 					  index == (i+1)*cols+ (j+1) || 
 					  index == (i+2)*cols+ (j+2) || 
 					  index == (i+3)*cols+ (j+3)
-					&& (x == 'red'  || x == 'blue') 
+					&& (x === 'red'  || x === 'blue') 
 					&& ((arr[i*cols+j] == x) 
-					&& (arr[(i+1)*cols+(j+1)]== x)
-					&& (arr[(i+2)*cols+(j+2)]== x)
-					&& (arr[(i+3)*cols+(j+3)]== x)))
+					&& (arr[(i+1)*cols+(j+1)] === x)
+					&& (arr[(i+2)*cols+(j+2)] === x)
+					&& (arr[(i+3)*cols+(j+3)] === x)))
 				{
 					this.index.push(index);
 					return true;
 				}
 		}, compareArrayLocations)
 				console.log(`compareArrayLocations: ${compareArrayLocations.index}`)
-				if (compareArray.length == 4 && compareArray.every((x, index, arr) => ((x == 'red' || x == 'blue') && x == arr[0]))) {
+				if (compareArray.length == 4 && compareArray.every((x, index, arr) => ((x === 'red' || x === 'blue') && x === arr[0]))) {
 					this.setState({
 						winningCircles: compareArrayLocations.index
 					})
@@ -221,18 +221,18 @@ export class Table extends Component{
 					index == (i+1)*cols+j || 
 					index == (i+2)*cols+j || 
 					index == (i+3)*cols+j)
-					&& (x == 'red'  || x == 'blue') 
+					&& (x === 'red'  || x === 'blue') 
 					&& ((arr[i*cols+j] == x) 
-					&& (arr[(i+1)*cols+j]== x)
-					&& (arr[(i+2)*cols+j]== x)
-					&& (arr[(i+3)*cols+j]== x)))
+					&& (arr[(i+1)*cols+j] === x)
+					&& (arr[(i+2)*cols+j] === x)
+					&& (arr[(i+3)*cols+j] === x)))
 					{
 						this.index.push(index);
 						return true;
 				}
 		}, compareArrayLocations);
 				console.log(`compareArray : ${compareArray}`)
-				if(compareArray.length == 4 && compareArray.every((x, index, arr) => ((x == 'red' || x == 'blue') && (x == arr[0])))) {
+				if(compareArray.length == 4 && compareArray.every((x, index, arr) => ((x === 'red' || x === 'blue') && (x === arr[0])))) {
 					console.log(`compareArray length ${compareArray.length}`);
 					this.setState({
 						winningCircles: compareArrayLocations.index
